@@ -149,7 +149,7 @@ if st.button("Find Candidate"):
     raw_text=uploaded_file.getvalue().decode('utf-8')
 
     res=llm_llama3.invoke(get_conversation(raw_text))
-    res=llm_llama3.invoke(get_prompt(raw_text.content))
+    res=llm_llama3.invoke(get_prompt(res.content))
     st.write(res.content)
     # st.write(json.dump(raw_text))
 
