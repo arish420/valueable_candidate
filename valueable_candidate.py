@@ -62,6 +62,7 @@ def get_conversation(conversation):
     3. Keep the order of messages as in the original JSON.
     4. Do not change or omit any message.
     5. If a message is empty or non-textual (e.g., photo, sticker), skip it.
+    6. No additional explation from your side.
     
     Here is the JSON conversation:
     
@@ -71,6 +72,7 @@ def get_conversation(conversation):
     Sender Name: Translated Message
     Sender Name: Translated Message
     ...
+    
     """
     
 def get_prompt(converasation):
@@ -146,7 +148,7 @@ uploaded_file=st.file_uploader("Import File",type=['json'])
 raw_text=uploaded_file.getvalue().decode('utf-8')
 if st.button("Find Candidate"):
     res=llm_llama3.invoke(get_conversation(raw_text))
-    # res=llm_llama3.invoke(get_prompt(raw_text))
+    res=llm_llama3.invoke(get_prompt(raw_text.content))
     st.write(res.content)
     # st.write(json.dump(raw_text))
 
