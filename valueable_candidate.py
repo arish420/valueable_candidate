@@ -48,6 +48,31 @@ llm_llama3 = ChatGroq(
     api_key=GROQ_API_KEY
 )
 
+
+def get_conversation(conversation):
+    return f""" You are provided with a Facebook Messenger conversation in raw text JSON format.
+
+    Each message includes a 'sender' (the person who sent the message) and its 'content' (the actual message text). The conversation is in **Polish**.
+    
+    Your task is to:
+    
+    1. Translate each 'content' value from **Polish to English**.
+    2. For each message, return a **single-line output** in the format:
+       Sender: Translated Message
+    3. Keep the order of messages as in the original JSON.
+    4. Do not change or omit any message.
+    5. If a message is empty or non-textual (e.g., photo, sticker), skip it.
+    
+    Here is the JSON conversation:
+    
+    {conversation}
+    
+    Return each message on a **separate line**, like:
+    Sender Name: Translated Message
+    Sender Name: Translated Message
+    ...
+    """
+    
 def get_prompt(converasation):
     return f"""You are an AI assistant designed to assess whether a candidate is suitable for manual labor professions based on their Facebook Messenger conversation. Follow these steps strictly:
     
@@ -120,7 +145,8 @@ uploaded_file=st.file_uploader("Import File",type=['json'])
 #         raw_text = " " + line
 raw_text=uploaded_file.getvalue().decode('utf-8')
 if st.button("Find Candidate"):
-    res=llm_llama3.invoke(get_prompt(raw_text))
+    res=llm_llama3.invoke(get_conversation(raw_text))
+    # res=llm_llama3.invoke(get_prompt(raw_text))
     st.write(res.content)
     # st.write(json.dump(raw_text))
 
