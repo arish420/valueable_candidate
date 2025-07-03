@@ -111,7 +111,7 @@ def get_prompt(converasation):
 
 st.title("Get Valuable Candidate")
 
-file=st.file_uploader("Import File",type=['json'])
+uploaded_file=st.file_uploader("Import File",type=['json'])
 # st.write()
 # raw_text=""
 # with open(file,'r') as f:
