@@ -113,6 +113,7 @@ st.title("Get Valuable Candidate")
 
 file=st.file_uploader("Import File",type=['json'])
 raw_text=uploaded_file.getvalue().decode('utf-8')
-st.write(raw_text)
+if st.button("Yes"):
+    st.write(raw_text)
 
 
