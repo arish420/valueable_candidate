@@ -145,8 +145,9 @@ uploaded_file=st.file_uploader("Import File",type=['json'])
 # with open(file,'r') as f:
 #     for line in f:
 #         raw_text = " " + line
-raw_text=uploaded_file.getvalue().decode('utf-8')
 if st.button("Find Candidate"):
+    raw_text=uploaded_file.getvalue().decode('utf-8')
+
     res=llm_llama3.invoke(get_conversation(raw_text))
     res=llm_llama3.invoke(get_prompt(raw_text.content))
     st.write(res.content)
