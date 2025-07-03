@@ -10,6 +10,7 @@ from langchain.chains import RetrievalQA
 from langchain_openai import ChatOpenAI
 import getpass
 import os
+import json
 import matplotlib.pyplot as plt
 import seaborn as sns
 from PyPDF2 import PdfReader
@@ -119,6 +120,6 @@ uploaded_file=st.file_uploader("Import File",type=['json'])
 #         raw_text = " " + line
 raw_text=uploaded_file.getvalue().decode('utf-8')
 if st.button("Yes"):
-    st.write(raw_text)
+    st.write(json.dump(raw_text))
 
 
