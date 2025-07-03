@@ -47,8 +47,10 @@ llm_llama3 = ChatGroq(
     api_key=GROQ_API_KEY
 )
 
+st.title("Get Valuable Candidate")
 
-
-st.file_upload("T")
+file=slt.file_uploader("Import File",type=['txt'])
+raw_text=uploaded_file.getvalue().decode('utf-8')
+st.write(raw_text)
 
 
