@@ -79,7 +79,7 @@ def get_prompt(converasation):
     return f"""You are an AI assistant designed to assess whether a candidate is suitable for manual labor professions based on their Facebook Messenger conversation. Follow these steps strictly:
     
     NOTE:
-    - The conversation is in **Polish language**, so translate and analyze carefully.
+    
     - If the **sender name is 'Ryszard Konieczny'**, IGNORE his messages — he is the recruiter (me).
     - ONLY analyze the messages from the responder (candidate).
     
