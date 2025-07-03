@@ -120,6 +120,8 @@ uploaded_file=st.file_uploader("Import File",type=['json'])
 #         raw_text = " " + line
 raw_text=uploaded_file.getvalue().decode('utf-8')
 if st.button("Yes"):
-    st.write(json.dump(raw_text))
+    res=llm_llama3.invoke(get_prompt(raw_text))
+    st.write(res.content)
+    # st.write(json.dump(raw_text))
 
 
