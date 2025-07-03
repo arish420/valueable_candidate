@@ -48,8 +48,7 @@ llm_llama3 = ChatGroq(
 )
 
 def get_prompt(converasation):
-    return f"""
-    You are an AI assistant designed to assess whether a candidate is suitable for manual labor professions based on their Facebook Messenger conversation. Follow these steps strictly:
+    return f"""You are an AI assistant designed to assess whether a candidate is suitable for manual labor professions based on their Facebook Messenger conversation. Follow these steps strictly:
     
     NOTE:
     - The conversation is in **Polish language**, so translate and analyze carefully.
@@ -112,7 +111,7 @@ def get_prompt(converasation):
 
 st.title("Get Valuable Candidate")
 
-file=slt.file_uploader("Import File",type=['txt'])
+file=st.file_uploader("Import File",type=['txt'])
 raw_text=uploaded_file.getvalue().decode('utf-8')
 st.write(raw_text)
 
