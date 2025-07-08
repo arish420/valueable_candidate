@@ -130,6 +130,10 @@ def get_prompt(converasation):
     Now analyze the following conversation based on the above rules.
     The conversation is in Polish and between the recruiter (Ryszard Konieczny) and the candidate in form json.
     IGNORE messages from Ryszard Konieczny. Analyze only the responder.
+
+    # Valuebale: Yes [if candiate possess all the criteria], otherwise No
+
+
     
     Conversation:
     {converasation}
