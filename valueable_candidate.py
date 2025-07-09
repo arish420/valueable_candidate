@@ -116,13 +116,13 @@ def get_prompt(converasation):
     
     I. ASSESS SUITABILITY (Verify Criteria Met):
     From the conversation, determine whether the candidate satisfies the following aspects (not all may be present):
-    1. Possession of Construction Tools
-    2. Own Accommodation
-    3. Own Transport
+    1. Possession of Construction Tools : Return mentioned tools
+    2. Own Accommodation: Mention location of accommodation
+    3. Own Transport: Mention the transport namme
     4. Communicative English Language Skills: Does candidate mention english communication skill in chat? Yes or No based on the conversation
     5. Work Experience:
        - Company names (if discussed)
-       - Years of experience
+       - Years of experience: Yes and mention year/months
        - Relevance to the profession they are applying for
     
     Important Rules:
@@ -131,7 +131,7 @@ def get_prompt(converasation):
     - If three or more aspects are discussed, evaluate overall suitability.
     - If the candidate clearly mentions a logistical obstacle (e.g., lives too far), still add to database.
     
-    II. PROFESSION CLASSIFICATION:
+    II. PROFESSION CLASSIFICATION: Return relevant profession
     If criteria from Point I are met, classify the candidate under one of the following professions:
     - Electrician
     - Plumber
@@ -148,6 +148,8 @@ def get_prompt(converasation):
     - Plasterer
     - Window Installer
     - Tiler
+
+    
 
     # Valuebale: Yes [if candiate possess all the criteria], otherwise No
 
