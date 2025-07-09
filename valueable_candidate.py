@@ -110,6 +110,8 @@ def get_prompt(converasation):
     
     - If the **sender name is 'Ryszard Konieczny'**, IGNORE his messages — he is the recruiter (me).
     - ONLY analyze the messages from the responder (candidate).
+    - The conversation is in Polish and between the recruiter (Ryszard Konieczny) and the candidate in form json.
+    - Decode the letter codes with great attention in context to polish language.
     
     I. ASSESS SUITABILITY (Verify Criteria Met):
     From the conversation, determine whether the candidate satisfies the following aspects (not all may be present):
@@ -180,11 +182,11 @@ uploaded_file=st.file_uploader("Import File",type=['json'])
 #         raw_text = " " + line
 if st.button("Find Candidate"):
     raw_text=uploaded_file.getvalue().decode('utf-8')
-    st.write(raw_text)
+    # st.write(raw_text)
 
     # # res=llm.invoke(get_conversation(raw_text))
-    # res=llm.invoke(get_prompt(raw_text))
-    # st.write(res.content)
+    res=llm.invoke(get_prompt(raw_text))
+    st.write(res.content)
     # st.write(json.dump(raw_text))
 
 
