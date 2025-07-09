@@ -116,7 +116,7 @@ def get_prompt(converasation):
     1. Possession of Construction Tools
     2. Own Accommodation
     3. Own Transport
-    4. Communicative English Language Skills (response should be binary, either person have English communication or not) no your suggestion
+    4. Communicative English Language Skills: Does candidate mention english communication skill in chat? Yes or No based on the conversation
     5. Work Experience:
        - Company names (if discussed)
        - Years of experience
