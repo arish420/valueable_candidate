@@ -39,6 +39,33 @@ import tiktoken
 load_dotenv()
 ###############################################################setting openai ai api##################################################################
 
+
+
+# https://docs.google.com/spreadsheets/d/1Dp6Y9ps4md393F5eRZzaZhu044k4JCmrbYDxWmQ6t2g/edit?gid=0#gid=0
+sheet_id = '1Dp6Y9ps4md393F5eRZzaZhu044k4JCmrbYDxWmQ6t2g' # replace with your sheet's ID
+url=f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
+df=pd.read_csv(url)
+# st.write(df)
+
+
+# def download_db():
+#     url = f"https://drive.google.com/uc?id={file_id}"
+#     gdown.download(url, output_file, quiet=False)
+#     return output_file
+# k=""
+# with open(download_db(),'r') as f:
+#     f=f.read()
+#     # st.write(f)
+#     k=f
+# # st.write(k)
+os.environ["OPENAI_API_KEY"] =  df.keys()[0]
+
+
+
+# Initialize GPT-4o-mini model
+llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.7)
+
+
 GROQ_API_KEY=os.getenv("GROQ_API_KEY")
 
 from langchain_groq import ChatGroq
@@ -153,8 +180,8 @@ uploaded_file=st.file_uploader("Import File",type=['json'])
 if st.button("Find Candidate"):
     raw_text=uploaded_file.getvalue().decode('utf-8')
 
-    res=llm_llama3.invoke(get_conversation(raw_text))
-    res=llm_llama3.invoke(get_prompt(res.content))
+    res=llm.invoke(get_conversation(raw_text))
+    res=llm.invoke(get_prompt(res.content))
     st.write(res.content)
     # st.write(json.dump(raw_text))
 
