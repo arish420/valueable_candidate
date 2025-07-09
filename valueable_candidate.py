@@ -145,7 +145,9 @@ def get_prompt(converasation):
     - Plasterer
     - Window Installer
     - Tiler
-    
+
+    # Valuebale: Yes [if candiate possess all the criteria], otherwise No
+
     III. DATA EXTRACTION:
     If the candidate passes Point I:
     - Extract Full Name (if mentioned)
@@ -158,8 +160,7 @@ def get_prompt(converasation):
     The conversation is in Polish and between the recruiter (Ryszard Konieczny) and the candidate in form json.
     IGNORE messages from Ryszard Konieczny. Analyze only the responder.
 
-    # Valuebale: Yes [if candiate possess all the criteria], otherwise No
-
+    
 
     
     Conversation:
@@ -180,8 +181,8 @@ uploaded_file=st.file_uploader("Import File",type=['json'])
 if st.button("Find Candidate"):
     raw_text=uploaded_file.getvalue().decode('utf-8')
 
-    res=llm.invoke(get_conversation(raw_text))
-    res=llm.invoke(get_prompt(res.content))
+    # res=llm.invoke(get_conversation(raw_text))
+    res=llm.invoke(get_prompt(raw_text))
     st.write(res.content)
     # st.write(json.dump(raw_text))
 
