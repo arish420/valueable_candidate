@@ -154,7 +154,7 @@ def get_prompt(converasation):
     # Valuebale: Yes [if candiate possess all the criteria], otherwise No
 
     III. DATA EXTRACTION:
-    If the candidate passes Point I:
+    If the candidate passes "ASSESS SUITABILITY" in Point I:
     - Extract Full Name (if mentioned)
     - Extract Phone Number (if mentioned)
     - Extract Place of Residence (if mentioned)
