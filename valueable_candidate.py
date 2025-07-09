@@ -112,7 +112,7 @@ def get_prompt(converasation):
     - ONLY analyze the messages from the responder (candidate).
     - The conversation is in Polish and between the recruiter (Ryszard Konieczny) and the candidate in form json.
     - Decode the letter codes with great attention in context to polish language.
-    - Return conversation part as proof to your clain
+    
     
     I. ASSESS SUITABILITY (Verify Criteria Met):
     From the conversation, determine whether the candidate satisfies the following aspects (not all may be present):
