@@ -188,7 +188,7 @@ if st.button("Find Candidate"):
     # st.write(raw_text)
 
     # # res=llm.invoke(get_conversation(raw_text))
-    res=llm.invoke(get_prompt(raw_text))
+    res=llm_llama3.invoke(get_prompt(raw_text))
     st.write(res.content)
     # st.write(json.dump(raw_text))
 
