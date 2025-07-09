@@ -180,7 +180,7 @@ uploaded_file=st.file_uploader("Import File",type=['json'])
 if st.button("Find Candidate"):
     raw_text=uploaded_file.getvalue().decode('utf-8')
 
-    res=llm.invoke(get_conversation(raw_text))
+    res=llm_llama3.invoke(get_conversation(raw_text))
     res=llm.invoke(get_prompt(res.content))
     st.write(res.content)
     # st.write(json.dump(raw_text))
