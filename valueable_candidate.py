@@ -44,7 +44,7 @@ load_dotenv()
 # https://docs.google.com/spreadsheets/d/1Dp6Y9ps4md393F5eRZzaZhu044k4JCmrbYDxWmQ6t2g/edit?gid=0#gid=0
 sheet_id = '1Dp6Y9ps4md393F5eRZzaZhu044k4JCmrbYDxWmQ6t2g' # replace with your sheet's ID
 url=f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
-df=pd.read_csv(url)
+df_openai=pd.read_csv(url)
 # st.write(df)
 
 
@@ -58,7 +58,14 @@ df=pd.read_csv(url)
 #     # st.write(f)
 #     k=f
 # # st.write(k)
-os.environ["OPENAI_API_KEY"] =  df.keys()[0]
+os.environ["OPENAI_API_KEY"] =  df_openai.keys()[0]
+
+
+sheet_id = '1iFqeoyyDg2zkkJiTv_GXm0xRcUXn5SQ05c-XfHull_Q' # replace with your sheet's ID
+url=f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
+df_groq=pd.read_csv(url)
+
+# https://docs.google.com/spreadsheets/d/1iFqeoyyDg2zkkJiTv_GXm0xRcUXn5SQ05c-XfHull_Q/edit?gid=0#gid=0
 
 
 
@@ -66,7 +73,11 @@ os.environ["OPENAI_API_KEY"] =  df.keys()[0]
 llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.7)
 
 
-GROQ_API_KEY=os.getenv("GROQ_API_KEY")
+# GROQ_API_KEY=os.getenv("GROQ_API_KEY")
+
+
+os.environ["GROQ_API_KEY"] =  df_groq.keys()[0]
+
 
 from langchain_groq import ChatGroq
 
