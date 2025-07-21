@@ -88,7 +88,7 @@ llm_llama3 = ChatGroq(
 )
 
 
-def get_conversation(conversation):
+def get_prompt(conversation):
     return f"""
         You are an AI assistant evaluating whether a candidate is suitable for a manual labor job based on a Facebook Messenger conversation.
         
