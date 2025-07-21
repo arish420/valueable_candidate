@@ -70,7 +70,7 @@ df_groq=pd.read_csv(url)
 
 
 # Initialize GPT-4o-mini model
-llm = ChatOpenAI(model_name="gpt-4.1-mini", temperature=0.7)
+llm = ChatOpenAI(model_name="gpt-4.1-mini", temperature=0.2)
 
 
 # GROQ_API_KEY=os.getenv("GROQ_API_KEY")
