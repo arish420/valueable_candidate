@@ -89,100 +89,97 @@ llm_llama3 = ChatGroq(
 
 
 def get_conversation(conversation):
-    return f""" You are provided with a Facebook Messenger conversation in raw text JSON format.
+    return f"""
+        You are an AI assistant evaluating whether a candidate is suitable for a manual labor job based on a Facebook Messenger conversation.
+        
+        The conversation is provided in JSON format where each message includes:
+        - 'sender': name of the person who sent the message
+        - 'content': the message text
+        The conversation is in **Polish**.
+        
+        ==========================
+        I. MESSAGE FILTERING RULES:
+        ==========================
+        1. IGNORE messages from **Ryszard Konieczny** (the recruiter).
+        2. Only analyze messages from the candidate.
+        3. Carefully interpret and translate Polish messages as needed.
+        
+        ==========================
+        II. ASSESS SUITABILITY:
+        ==========================
+        Evaluate whether the candidate meets the following criteria:
+        
+        1. **Possession of Construction Tools**:
+           - List any tools mentioned by the candidate.
+        
+        2. **Own Accommodation**:
+           - Extract the location of accommodation if mentioned.
+        
+        3. **Own Transport**:
+           - Mention the type of transport (e.g. car, van, public transport).
+        
+        4. **English Communication Skills**:
+           - Does the candidate say they can speak/understand English?
+           - Answer: Yes or No
+        
+        5. **Work Experience**:
+           - Mention any companies referenced.
+           - Note duration (years/months) of experience.
+           - Identify whether experience is relevant to the job role.
+        
+        ==========================
+        III. SUITABILITY DECISION:
+        ==========================
+        Based on the above criteria:
+        
+        - If only one aspect is discussed and it is met → **Add to database**
+        - If two aspects are discussed and one is NOT met → **Reject the candidate**
+        - If three or more aspects are discussed → **Evaluate overall suitability**
+        - If a logistical challenge is mentioned (e.g. far away residence) → **Still add to database**
+        
+        ==========================
+        IV. PROFESSION CLASSIFICATION:
+        ==========================
+        If the candidate is suitable, classify them into one of the following roles:
+        
+        - Electrician
+        - Plumber
+        - Carpenter
+        - Concrete Specialist
+        - Painter
+        - CNC Operator
+        - Concrete Repairer
+        - Steel Structure Installer
+        - Roofer
+        - MetalStud Installer
+        - Ceiling System Installer
+        - Earthworker
+        - Plasterer
+        - Window Installer
+        - Tiler
+        
+        Also return:
+        - **Valuable**: Yes → if candidate satisfies all criteria
+        - **Valuable**: No → if any key criteria are missing
+        
+        ==========================
+        V. CANDIDATE DETAILS (If valuebale == Yes):
+        ==========================
+        Extract the following if mentioned:
+        - Full Name
+        - Phone Number
+        - Place of Residence
+        - Profession (as classified above)
+        
+        ==========================
+        VI. INPUT CONVERSATION:
+        ==========================
+        Below is the conversation in JSON format (in Polish). Ignore recruiter messages. Analyze only candidate's messages.
+        
+        Conversation:
+        {conversation}
+        """
 
-    Each message includes a 'sender' (the person who sent the message) and its 'content' (the actual message text). The conversation is in **Polish**.
-    
-    Your task is to:
-    
-    1. Translate each 'content' value from **Polish to English**.
-    2. For each message, return a **single-line output** in the format:
-       Sender: Translated Message
-    3. Keep the order of messages as in the original JSON.
-    4. Do not change or omit any message.
-    5. If a message is empty or non-textual (e.g., photo, sticker), skip it.
-    6. No additional explation from your side.
-    
-    Here is the JSON conversation:
-    
-    {conversation}
-    
-    Return each message on a **separate line**, like:
-    Sender Name: Translated Message
-    Sender Name: Translated Message
-    ...
-    
-    """
-    
-def get_prompt(converasation):
-    return f"""You are an AI assistant designed to assess whether a candidate is suitable for manual labor professions based on their Facebook Messenger conversation. Follow these steps strictly:
-    
-    NOTE:
-    
-    - If the **sender name is 'Ryszard Konieczny'**, IGNORE his messages — he is the recruiter (me).
-    - ONLY analyze the messages from the responder (candidate).
-    - The conversation is in Polish and between the recruiter (Ryszard Konieczny) and the candidate in form json.
-    - Decode the letter codes with great attention in context to polish language.
-
-    # Valuebale: Yes [if candiate possess all the criteria], otherwise No
-
-    I. DATA EXTRACTION:
-    If the candidate passes "ASSESS SUITABILITY" in Point I:
-    - Extract Full Name (if mentioned)
-    - Extract Phone Number (if mentioned)
-    - Extract Place of Residence (if mentioned)
-    - Extract Profession (as per classification)
-    
-    
-    II. ASSESS SUITABILITY (Verify Criteria Met):
-    From the conversation, determine whether the candidate satisfies the following aspects (not all may be present):
-    1. Possession of Construction Tools : Return mentioned tools
-    2. Own Accommodation: Mention location of accommodation
-    3. Own Transport: Mention the transport namme
-    4. Communicative English Language Skills: Does candidate mention english communication skill in chat? Yes or No based on the conversation
-    5. Work Experience:
-       - Company names (if discussed)
-       - Years of experience: Yes and mention year/months
-       - Relevance to the profession they are applying for
-    
-    Important Rules:
-    - If only one aspect is discussed and it is met, add to database.
-    - If two aspects are discussed and one is not met, reject the candidate.
-    - If three or more aspects are discussed, evaluate overall suitability.
-    - If the candidate clearly mentions a logistical obstacle (e.g., lives too far), still add to database.
-    
-    III. PROFESSION CLASSIFICATION: Return relevant profession
-    If criteria from Point I are met, classify the candidate under one of the following professions:
-    - Electrician
-    - Plumber
-    - Carpenter
-    - Concrete Specialist
-    - Painter
-    - CNC Operator
-    - Concrete Repairer
-    - Steel Structure Installer
-    - Roofer
-    - MetalStud Installer
-    - Ceiling System Installer
-    - Earthworker
-    - Plasterer
-    - Window Installer
-    - Tiler
-
-    
-
-    
-   IV. INPUT CONVERSATION FOR ANALYSIS:
-    Now analyze the following conversation based on the above rules.
-    The conversation is in Polish and between the recruiter (Ryszard Konieczny) and the candidate in form json.
-    IGNORE messages from Ryszard Konieczny. Analyze only the responder.
-
-    
-
-    
-    Conversation:
-    {converasation}
-    """
 
 
 
