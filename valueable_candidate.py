@@ -123,9 +123,18 @@ def get_prompt(converasation):
     - ONLY analyze the messages from the responder (candidate).
     - The conversation is in Polish and between the recruiter (Ryszard Konieczny) and the candidate in form json.
     - Decode the letter codes with great attention in context to polish language.
+
+    # Valuebale: Yes [if candiate possess all the criteria], otherwise No
+
+    I. DATA EXTRACTION:
+    If the candidate passes "ASSESS SUITABILITY" in Point I:
+    - Extract Full Name (if mentioned)
+    - Extract Phone Number (if mentioned)
+    - Extract Place of Residence (if mentioned)
+    - Extract Profession (as per classification)
     
     
-    I. ASSESS SUITABILITY (Verify Criteria Met):
+    II. ASSESS SUITABILITY (Verify Criteria Met):
     From the conversation, determine whether the candidate satisfies the following aspects (not all may be present):
     1. Possession of Construction Tools : Return mentioned tools
     2. Own Accommodation: Mention location of accommodation
@@ -142,7 +151,7 @@ def get_prompt(converasation):
     - If three or more aspects are discussed, evaluate overall suitability.
     - If the candidate clearly mentions a logistical obstacle (e.g., lives too far), still add to database.
     
-    II. PROFESSION CLASSIFICATION: Return relevant profession
+    III. PROFESSION CLASSIFICATION: Return relevant profession
     If criteria from Point I are met, classify the candidate under one of the following professions:
     - Electrician
     - Plumber
@@ -162,16 +171,8 @@ def get_prompt(converasation):
 
     
 
-    # Valuebale: Yes [if candiate possess all the criteria], otherwise No
-
-    III. DATA EXTRACTION:
-    If the candidate passes "ASSESS SUITABILITY" in Point I:
-    - Extract Full Name (if mentioned)
-    - Extract Phone Number (if mentioned)
-    - Extract Place of Residence (if mentioned)
-    - Extract Profession (as per classification)
     
-    IV. INPUT CONVERSATION FOR ANALYSIS:
+   IV. INPUT CONVERSATION FOR ANALYSIS:
     Now analyze the following conversation based on the above rules.
     The conversation is in Polish and between the recruiter (Ryszard Konieczny) and the candidate in form json.
     IGNORE messages from Ryszard Konieczny. Analyze only the responder.
